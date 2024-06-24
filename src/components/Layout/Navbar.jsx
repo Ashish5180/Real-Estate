@@ -1,46 +1,37 @@
 import { Fragment, useState } from 'react';
 import { Dialog, Disclosure, Popover, Transition } from '@headlessui/react';
-import { Bars3Icon, XMarkIcon, BuildingOffice2Icon, HomeIcon, HomeModernIcon, DocumentCheckIcon, BuildingLibraryIcon } from '@heroicons/react/24/outline';
-import { ChevronDownIcon } from '@heroicons/react/20/solid';
+import { Bars3Icon, XMarkIcon, BuildingOffice2Icon, HomeIcon, HomeModernIcon, DocumentCheckIcon, BuildingLibraryIcon, ChevronDownIcon } from '@heroicons/react/24/outline';
 import img from '../../assets/professional_yellow_logo-removebg-preview.png';
 import { Link, NavLink } from "react-router-dom";
 
 import { useAuth0 } from "@auth0/auth0-react";
-//  Auth 0 is used in app to authenticate users
 
 const products = [
-  { name: 'Buy a Home', description: 'Get your dream house', href: 'BuyHome', icon: HomeIcon },
-  { name: 'Commercial', description: 'Get and expand your business', href: 'Commercial', icon: BuildingLibraryIcon },
-  { name: 'Land/Plots', description: 'Secure for the future', href: 'Land', icon: DocumentCheckIcon },
-  { name: 'Flats', description: 'Get our home on monthly charges', href: 'Flat', icon: BuildingOffice2Icon },
-  { name: 'Villas', description: 'Get villas affordably', href: 'Villa', icon: HomeModernIcon },
+  { name: 'Buy a Home', description: 'Get your dream house', href: '/products/BuyHome', icon: HomeIcon },
+  { name: 'Commercial', description: 'Get and expand your business', href: '/products/Commercial', icon: BuildingLibraryIcon },
+  { name: 'Land/Plots', description: 'Secure for the future', href: '/products/Land', icon: DocumentCheckIcon },
+  { name: 'Flats', description: 'Get our home on monthly charges', href: '/products/Flat', icon: BuildingOffice2Icon },
+  { name: 'Villas', description: 'Get villas affordably', href: '/products/Villa', icon: HomeModernIcon },
 ];
-
-// const callsToAction = [
-//   { name: 'Watch demo', href: '#', icon: PlayCircleIcon },
-//   { name: 'Contact sales', href: 'Contact', icon: PhoneIcon },
-// ];
 
 function classNames(...classes) {
   return classes.filter(Boolean).join(' ');
 }
 
-export default function Example() {
+export default function Navbar() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
-  const { loginWithRedirect } = useAuth0();
-  const { logout } = useAuth0();
-  const {isAuthenticated} = useAuth0();
+  const { loginWithRedirect, logout, isAuthenticated } = useAuth0();
+
   return (
     <>
       {/* Header */}
       <header className="bg-white">
-
         {/* Navigation */}
         <nav className="mx-auto flex max-w-7xl items-center justify-between p-6 lg:px-8" aria-label="Global">
           <div className="flex lg:flex-1">
             <NavLink to="/" className="-m-1.5 p-1.5">
               <span className="sr-only">Your Company</span>
-              <img className="h-20 w-auto" src={img} alt="" />
+              <img className="h-20 w-auto" src={img} alt="Company Logo" />
             </NavLink>
           </div>
 
@@ -55,7 +46,6 @@ export default function Example() {
               <Bars3Icon className="h-6 w-6" aria-hidden="true" />
             </button>
           </div>
-
 
           {/* Desktop Menu */}
           <Popover.Group className="hidden lg:flex lg:gap-x-12">
@@ -84,7 +74,7 @@ export default function Example() {
                         className="group relative flex items-center gap-x-6 rounded-lg p-4 text-sm leading-6 hover:bg-gray-50"
                       >
                         <div className="flex h-11 w-11 flex-none items-center justify-center rounded-lg bg-gray-50 group-hover:bg-white">
-                          <item.icon className="h-6 w-6 text-gray-600 group-hover:text-indigo-600 " aria-hidden="true" />
+                          <item.icon className="h-6 w-6 text-gray-600 group-hover:text-indigo-600" aria-hidden="true" />
                         </div>
                         <div className="flex-auto">
                           <NavLink to={item.href} className="block font-semibold text-gray-900">
@@ -96,58 +86,45 @@ export default function Example() {
                       </div>
                     ))}
                   </div>
-
-
-                  {/* Call to Action Buttons */}
-                  {/* <div className="grid grid-cols-2 divide-x divide-gray-900/5 bg-gray-50">
-                    {callsToAction.map((item) => (
-                      <NavLink
-                        key={item.name}
-                        to={item.href}
-                        className="flex items-center justify-center gap-x-2.5 p-3 text-sm font-semibold leading-6 text-gray-900 hover:bg-gray-100"
-                      >
-                        <item.icon className="h-5 w-5 flex-none text-gray-400" aria-hidden="true" />
-                        {item.name}
-                      </NavLink>
-                    ))}
-                  </div> */}
                 </Popover.Panel>
               </Transition>
             </Popover>
 
             {/* Other Links */}
-            <NavLink to="/Home" className=" text-xl font-semibold leading-6 text-gray-900">
+            <NavLink to="/Home" className="text-xl font-semibold leading-6 text-gray-900">
               Home
             </NavLink>
-            <NavLink to="/Sites" className=" text-xl font-semibold leading-6 text-gray-900">
+            <NavLink to="/Sites" className="text-xl font-semibold leading-6 text-gray-900">
               Sites
             </NavLink>
-            <NavLink to="/AboutUs" className=" text-xl font-semibold leading-6 text-gray-900">
-              About us
+            <NavLink to="/AboutUs" className="text-xl font-semibold leading-6 text-gray-900">
+              About Us
             </NavLink>
-            <NavLink to="/Dealership" className=" text-xl font-semibold leading-6 text-gray-900">
+            <NavLink to="/Dealership" className="text-xl font-semibold leading-6 text-gray-900">
               Dealership
             </NavLink>
-            <NavLink to="/Contact" className=" text-xl font-semibold leading-6 text-gray-900">
+            <NavLink to="/Contact" className="text-xl font-semibold leading-6 text-gray-900">
               Contact Us
             </NavLink>
           </Popover.Group>
 
           {/* Login Button */}
           <div className="hidden lg:flex lg:flex-1 lg:justify-end">
-            {
-              isAuthenticated?
-              <button className="text-xl font-semibold leading-6 hover:bg-yellow-300 p-3 rounded-3xl text-gray-900" onClick={() => logout({ logoutParams: { returnTo: window.location.origin } })}>
-      Log Out
-    </button>
-              :
-              <button className="text-xl font-semibold leading-6 hover:bg-yellow-300 p-3 rounded-3xl text-gray-900" onClick={() => loginWithRedirect()}>
-                Log in 
+            {isAuthenticated ? (
+              <button
+                className="text-xl font-semibold leading-6 hover:bg-yellow-300 p-3 rounded-3xl text-gray-900"
+                onClick={() => logout({ returnTo: window.location.origin })}
+              >
+                Log Out
               </button>
-            }
-            
-            
-
+            ) : (
+              <button
+                className="text-xl font-semibold leading-6 hover:bg-yellow-300 p-3 rounded-3xl text-gray-900"
+                onClick={() => loginWithRedirect()}
+              >
+                Log in
+              </button>
+            )}
           </div>
         </nav>
 
@@ -158,11 +135,7 @@ export default function Example() {
             <div className="flex items-center justify-between">
               <Link to="/" className="-m-1.5 p-1.5">
                 <span className="sr-only">Your Company</span>
-                <img
-                  className="h-8 w-auto"
-                  src={img}
-                  alt=""
-                />
+                <img className="h-8 w-auto" src={img} alt="Company Logo" />
               </Link>
               <button
                 type="button"
@@ -182,22 +155,22 @@ export default function Example() {
                     {({ open }) => (
                       <>
                         <Disclosure.Button className="flex w-full items-center justify-between rounded-lg py-2 pl-3 pr-3.5 text-base font-semibold leading-7 text-gray-900 hover:bg-gray-50">
-                          Product
+                          Products
                           <ChevronDownIcon
                             className={classNames(open ? 'rotate-180' : '', 'h-5 w-5 flex-none')}
                             aria-hidden="true"
                           />
                         </Disclosure.Button>
                         <Disclosure.Panel className="mt-2 space-y-2">
-                          {[...products].map((item) => (
-                            <Disclosure.Button
+                          {products.map((item) => (
+                            <NavLink
                               key={item.name}
-                              as="a"
-                              href={item.href}
+                              to={item.href}
                               className="block rounded-lg py-2 pl-6 pr-3 text-sm font-semibold leading-7 text-gray-900 hover:bg-gray-50"
+                              onClick={() => setMobileMenuOpen(false)}
                             >
                               {item.name}
-                            </Disclosure.Button>
+                            </NavLink>
                           ))}
                         </Disclosure.Panel>
                       </>
@@ -207,41 +180,50 @@ export default function Example() {
                   <NavLink
                     to="/Sites"
                     className="-mx-3 block rounded-lg px-3 py-2 text-base font-semibold leading-7 text-gray-900 hover:bg-gray-50"
+                    onClick={() => setMobileMenuOpen(false)}
                   >
                     Sites
                   </NavLink>
                   <NavLink
                     to="/AboutUs"
                     className="-mx-3 block rounded-lg px-3 py-2 text-base font-semibold leading-7 text-gray-900 hover:bg-gray-50"
+                    onClick={() => setMobileMenuOpen(false)}
                   >
-                    About us
+                    About Us
                   </NavLink>
                   <NavLink
                     to="/Dealership"
                     className="-mx-3 block rounded-lg px-3 py-2 text-base font-semibold leading-7 text-gray-900 hover:bg-gray-50"
+                    onClick={() => setMobileMenuOpen(false)}
                   >
                     Dealership
                   </NavLink>
                   <NavLink
                     to="/Contact"
                     className="-mx-3 block rounded-lg px-3 py-2 text-base font-semibold leading-7 text-gray-900 hover:bg-gray-50"
+                    onClick={() => setMobileMenuOpen(false)}
                   >
-                    Contact us
+                    Contact Us
                   </NavLink>
                 </div>
               </div>
               {/* Login Link */}
               <div className="py-6">
-              {
-              isAuthenticated?
-              <button className="text-xl font-semibold leading-6 hover:bg-yellow-300 p-3 rounded-3xl text-gray-900" onClick={() => logout({ logoutParams: { returnTo: window.location.origin } })}>
-      Log Out
-    </button>
-              :
-              <button className="text-xl font-semibold leading-6 hover:bg-yellow-300 p-3 rounded-3xl text-gray-900" onClick={() => loginWithRedirect()}>
-                Log in 
-              </button>
-            }
+                {isAuthenticated ? (
+                  <button
+                    className="text-xl font-semibold leading-6 hover:bg-yellow-300 p-3 rounded-3xl text-gray-900"
+                    onClick={() => logout({ returnTo: window.location.origin })}
+                  >
+                    Log Out
+                  </button>
+                ) : (
+                  <button
+                    className="text-xl font-semibold leading-6 hover:bg-yellow-300 p-3 rounded-3xl text-gray-900"
+                    onClick={() => loginWithRedirect()}
+                  >
+                    Log in
+                  </button>
+                )}
               </div>
             </div>
           </Dialog.Panel>

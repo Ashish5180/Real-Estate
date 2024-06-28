@@ -1,8 +1,5 @@
 import React from 'react'
-// https://is1-3.housingcdn.com/4f2250e8/a7eab5573fe84b4f23bf972845e025ae/v0/fs/keshvam_reality-wardha_road-nagpur-bhumesh_realtors.jpeg
-// https://rsandeshgroupinfra.com/wp-content/uploads/2022/05/3D-Map-Highway-Radiance-r-sandesh-group-infra-.jpg
-// https://www.bigproperty.in/storage/2023/05/WhatsApp-Image-2023-05-04-at-5.44.35-PM.jpeg
-// https://4.imimg.com/data4/YT/VW/ANDROID-34162931/product.jpeg
+import bg from '../../assets/Bg6.mp4'
 function Land() {
   const products = [
     {
@@ -42,7 +39,7 @@ function Land() {
     <>
     <div className="static h-screen py-24 " id='home'>
     <video autoPlay muted loop className='absolute top-0 left-0 w-full h-screen object-cover bg-center z-[-1] '>
-      <source src='Bg6.mp4' type='video/mp4' />
+      <source src={bg} type='video/mp4' />
       Your browser does not support the video tag.
     </video>
    
